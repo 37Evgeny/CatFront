@@ -14,6 +14,7 @@ class Card{
         const cardTage= this.element.querySelector('.card__age')
         const cardImage= this.element.querySelector('.card__image')
         const cardLike = this.element.querySelector('.card__like')
+        const cardDelete = this.element.querySelector('.card__delete')
 
         // Check if img_link exists, otherwise use a default image
         
@@ -26,6 +27,7 @@ class Card{
         cardTage.textContent = 'Возраст : ' + this._data.age;
         cardImage.src = this._data.img_link ? this._data.img_link : '/Users/totenkopf/Desktop/Programming/Git/CatFront/img/cat.jpg';
         // cardImage.src=this._data.img_link;
+        
 
         if (cardLike) {
             cardLike.addEventListener('click', () => {
@@ -33,8 +35,20 @@ class Card{
             });
         }
 
+        // Добавление обработчика события на кнопку удаления
+        cardDelete.addEventListener('click', () => {
+            console.log(`${this._data.name} удалена!`);
+            // Здесь можно добавить логику для удаления карточки из DOM
+            this.element.remove(); // Простой пример удаления карточки из DOM
+        });
+    
+
         return this.element;
     }
+
+    
+
+
 
     toggleLike() {
         // Logic to handle like functionality

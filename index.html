@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Project Cats</title>
     <script src="https://kit.fontawesome.com/3e2b3d0dcf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
 </head>
@@ -17,11 +18,14 @@
             <button class="btn" id="login">Войти</button>
         </div>
     </header>
-
+    
+    
     <main class="main container">
             <section class="cards">
                 <h2 class="visually-hidden">Список котиков</h2>
             </section>
+
+           
     </main>
 
     <footer class="footer">
@@ -77,6 +81,7 @@
             <a href="#" class="card__link"><h3 class="card__name"></h3></a>
             <a href="#" class="card__link__age"><h3 class="card__age"></h3></a>
             <button class="card__like" aria-label="Поставить лайк"><i class="fa-solid fa-heart fa-2x"></i></button>
+            <button class="card__delete" aria-label="Удалить котика"><i class="fa-solid fa-trash fa-xl" style="color: #ff0a0a;"></i></button>
         </div>
     </template>
 
