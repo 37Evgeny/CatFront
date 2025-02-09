@@ -1,0 +1,10 @@
+.soc{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.soc__link{
+    color: black;
+    font-size: 25px;
+}

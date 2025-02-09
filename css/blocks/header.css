@@ -1,0 +1,12 @@
+.header{
+    box-shadow: 0 0 2px black;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.header__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

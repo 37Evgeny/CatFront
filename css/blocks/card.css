@@ -1,0 +1,88 @@
+.card {
+    height: 166px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card__link {
+    position: absolute;
+    z-index: 2;
+    text-decoration: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card__link__age {
+    white-space: nowrap;
+    position: absolute;
+    z-index: 2;
+    text-decoration: none;
+    top: 90%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+}
+
+.card__age {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+
+.card__name {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.card__name:hover:after {
+    font: var(--fa-font-solid);
+    content: "\f00e";
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    position:  absolute;
+    left: 100%;
+    margin-left: 5px;
+}
+
+.card__like {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    background-color: transparent;
+    background-image: none;
+    color: red;
+    padding: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff8;
+    backdrop-filter: blur(1px);
+    transition: .5s linear;
+    /* transition-property: backdrop-filter, background-color; */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Увеличение карточки при наведении */
+}
+
+.card:hover::before {
+    background-color: none; /* Можно изменить цвет фона при наведении */
+    backdrop-filter: none;
+}
