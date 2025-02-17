@@ -125,6 +125,15 @@ class Api {
             headers: this._headers
         }).then(this._onRes)
     }
+
+    // Метод для удаления котика по ID
+deleteCat(catId) {
+    return fetch(`${this._url}/cats/${catId}`, {
+        method: 'DELETE',
+        headers: this._headers
+    })
+    .then(this._onRes)
+}
 }
 
 const api = new Api(CONFIG_API);

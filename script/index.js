@@ -42,6 +42,7 @@ function formAddCat(event){
 
 
 
+
 function serializeForm(elem){
     const formData ={};
     elem.forEach(input =>{
