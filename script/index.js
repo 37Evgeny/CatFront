@@ -4,7 +4,7 @@ const btnOpenAuthorization= document.querySelector('#login');
 const formCatAdd = document.querySelector('#popup-form-cat');
 const formAuthorization = document.querySelector('#form-login');
 
-// вызов метода getAllCats
+// вызов метода getAllCats получакм всех котиков
 api.getAllCats()
     .then(data => {
         console.log(data + 'index'); // Логируем данные о котиках
@@ -17,7 +17,7 @@ api.getAllCats()
                         // Добавляем на страницу  
                         cardsContainer.append(newCardElem);
                     }) 
-    })
+         })
     .catch(error => {
         console.error('Ошибка при получении котиков:', error); // Обработка ошибок
     });
@@ -38,10 +38,6 @@ function formAddCat(event){
             AddCat.close();
         })
 }
-
-
-
-
 
 function serializeForm(elem){
     const formData ={};
