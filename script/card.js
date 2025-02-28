@@ -18,6 +18,7 @@ class Card {
         this.element = this._getTemplate().cloneNode(true);
         const cardTitle = this.element.querySelector('.card__name');
         const cardAge = this.element.querySelector('.card__age');
+        const cardBreed = this.element.querySelector('.card__breed');
         const cardImage = this.element.querySelector('.card__image');
         const cardLike = this.element.querySelector('.card__like');
         // const cardLike = this.element.querySelector('.card__like').nextElementSibling;
@@ -25,6 +26,7 @@ class Card {
 
         cardTitle.textContent = this._data.name;
         cardAge.textContent = 'Возраст: ' + this._data.age;
+        cardBreed.textContent = this._data.breed;
         // заполняем карточку данными о коте. Если ссылка на изображение отсутствует, используется изображение по умолчанию
         cardImage.src = this._data.img_link ? this._data.img_link : './path/to/default/cat.jpg';
 
