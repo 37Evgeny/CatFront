@@ -62,12 +62,12 @@ class Card {
     updateLikeButton(cardLike) {
         if (this._isLiked) {
             // Добавляем классы для визуального эффекта
-            cardLike.classList.remove('fa-regular', 'fa-heart'); 
+            cardLike.classList.remove('fa-regular', 'fa-heart', 'fa-fade'); 
             cardLike.classList.add('fa-solid', 'fa-heart'); 
         } else {
              // Убираем классы
             cardLike.classList.remove('fa-solid', 'fa-heart');
-            cardLike.classList.add('fa-regular', 'fa-heart'); 
+            cardLike.classList.add('fa-regular', 'fa-heart', 'fa-fade'); 
         }
     }
 }

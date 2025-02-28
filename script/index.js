@@ -20,8 +20,10 @@ api.getAllCats()
                         const cardInst = new Card(dataCat, '#card-template');
                         // Возвращаем разметку
                         const newCardElem = cardInst.getElement();
+                        newCardElem.addEventListener('click', () => showExpandedCard(dataCat)); // Добавляем обработчик нажатия
                         // Добавляем на страницу  
                         cardsContainer.append(newCardElem);
+                       
                     }) 
          })
     .catch(error => {
@@ -68,6 +70,30 @@ function serializeForm(elem){
     })
     // Возвращаем объект с данными формы
     return formData;
+}
+
+// Функция для отображения развернутой карточки в виде модального окна
+function showExpandedCard(dataCat) {
+    const modal = document.createElement('div'); // Создаем элемент для модального окна
+    modal.classList.add('modal'); // Добавляем класс для стилизации
+    modal.innerHTML = `
+        <div class="modal-content">
+        <button class="close-btn"><i class="fa-solid fa-xmark"> </i></button>
+            <h2>${dataCat.name}</h2>
+            <img src="${dataCat.img_link}" alt="${dataCat.name}">
+            <p>Порода: ${dataCat.breed}</p>
+            <p>Возраст: ${dataCat.age}</p>
+            <p>Описание: ${dataCat.description}</p>
+        </div>
+    `; // Заполняем разметку данными о котике
+
+    // Добавляем обработчик для закрытия модального окна
+    modal.querySelector('.close-btn').addEventListener('click', () => {
+        modal.remove(); // Удаляем модальное окно
+    });
+
+    // Добавляем модальное окно в body
+    document.body.append(modal);
 }
 
 // Создаем экземпляр всплывающего окна для добавления котика
