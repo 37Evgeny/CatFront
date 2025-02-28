@@ -107,6 +107,42 @@ btnOpenPopup.addEventListener('click',()=>  AddCat.open());
 // Обрабатываем отправку формы добавления котика
 formCatAdd.addEventListener('submit', formAddCat)
 
+
+// Функция для получения данных о породах из API
+async function fetchBreeds() {
+    try {
+        const response = await fetch('http://89.111.169.234:3000/cats'); // Замените на URL вашего API
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const dataCat = await response.json(); // Предполагаем, что API возвращает JSON
+        displayBreeds(dataCat); // Вызываем функцию для отображения пород
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+    }
+}
+
+// Функция для отображения пород
+function displayBreeds(breeds) {
+    const breed__sort = document.querySelector('.breed__sort');
+    const breedLinks = breeds.map(breed => {
+        return `<a class="breed__link">${breed.breed}</a>`;
+    }).join('');
+
+    // Добавляем ссылки на породы в div с классом breed
+    document.querySelector('.breed__sort').innerHTML = breedLinks;
+
+}
+
+// Вызываем функцию после загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    fetchBreeds(); // Запускаем получение данных
+});
+
+
+
+
+
 // //Функция Авторизации
 // function formFromAuthorization(event){
 //     event.preventDefault();

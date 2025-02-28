@@ -55,7 +55,7 @@
 .card__like {
     position: absolute;
     top: 80%;
-    right: 90%;
+    right: 85%;
     border: none;
     background-color: transparent;
     background-image: none;
@@ -63,6 +63,7 @@
     padding: 0;
     cursor: pointer;
     z-index: 2;
+    font-size: 20px;
 }
 
 .card__delete {
