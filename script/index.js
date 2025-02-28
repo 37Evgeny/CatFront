@@ -20,10 +20,11 @@ api.getAllCats()
                         const cardInst = new Card(dataCat, '#card-template');
                         // Возвращаем разметку
                         const newCardElem = cardInst.getElement();
-                        newCardElem.addEventListener('click', () => showExpandedCard(dataCat)); // Добавляем обработчик нажатия
+                        // Находим элемент с именем котика и добавляем обработчик нажатия
+                        const catNameElement = newCardElem.querySelector('.card__name');
+                        catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); // Открываем модальное окно при нажатии на имя котика
                         // Добавляем на страницу  
                         cardsContainer.append(newCardElem);
-                       
                     }) 
          })
     .catch(error => {
@@ -79,7 +80,7 @@ function showExpandedCard(dataCat) {
     modal.innerHTML = `
         <div class="modal-content">
         <button class="close-btn"><i class="fa-solid fa-xmark"> </i></button>
-            <h2>${dataCat.name}</h2>
+            <h2><span class="cat-name">${dataCat.name}</span></h2>
             <img src="${dataCat.img_link}" alt="${dataCat.name}">
             <p>Порода: ${dataCat.breed}</p>
             <p>Возраст: ${dataCat.age}</p>
