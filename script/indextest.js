@@ -9,109 +9,29 @@ const formCatAdd = document.querySelector('#popup-form-cat');
 // Форма авторизации (не используется в коде)
 const formAuthorization = document.querySelector('#form-login');
 
-async function fetchCats() {
-    try {
-        // showLoadingIndicator(); // Показать индикатор загрузки
-        const response = await api.getAllCats();
-        console.log(response)
-        const dataCat = await response;
-        renderCards(dataCat); // Отображаем карточки
-    } catch (error) {
+// вызов метода getAllCats получакм всех котиков
+
+    api.getAllCats()
+    .then(data => {
+        // Логируем данные о котиках
+        console.log(data + 'index'); 
+        data.forEach(function(dataCat){
+                        // Создаем карточу
+                        const cardInst = new Card(dataCat, '#card-template');
+                        // Возвращаем разметку
+                        const newCardElem = cardInst.getElement();
+                        // Находим элемент с именем котика и добавляем обработчик нажатия
+                        const catNameElement = newCardElem.querySelector('.card__name');
+                        // Открываем модальное окно при нажатии на имя котика
+                        catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); 
+                        // Добавляем на страницу  
+                        cardsContainer.append(newCardElem);
+                    }) 
+         })
+    .catch(error => {
         console.error('Ошибка при получении котиков:', error); // Обработка ошибок
-        alert('Не удалось загрузить котиков. Попробуйте позже.'); // Уведомление пользователя
-    } finally {
-        // hideLoadingIndicator(); // Скрыть индикатор загрузки
-    }
-}
-
-function renderCards(cats) {
-    const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением карточек
-    cats.forEach(dataCat => {
-        createAndAppendCard(dataCat, cardsContainer);
     });
-}
 
-function createAndAppendCard(dataCat, container) {
-    const cardInst = new Card(dataCat, '#card-template');
-    const newCardElem = cardInst.getElement();
-    const catNameElement = newCardElem.querySelector('.card__name');
-    catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); // Открываем модальное окно при нажатии на имя котика
-    container.append(newCardElem);
-}
-
-// Функция для отображения всех котиков
-function getAllCats() {
-    fetchCats(); // Вызываем функцию для получения всех котиков
-}
-
-// Добавляем обработчик события для кнопки
-document.getElementById('showAllCats').addEventListener('click', getAllCats);
-
-// Функция для получения данных о породах из API
-async function fetchBreeds() {
-    try {
-        const response = await fetch('http://89.111.169.234:3000/cats');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const dataCat = await response.json(); // Предполагаем, что API возвращает JSON
-        const uniqueBreeds = [...new Set(dataCat.map(cat => cat.breed))]; // Удаляем дубликаты
-        displayBreeds(uniqueBreeds); // Вызываем функцию для отображения пород
-        // renderCards(dataCat); // Отображаем карточки
-    } catch (error) {
-        console.error('Ошибка при получении данных:', error);
-    }
-}
-
-// Функция для отображения пород
-function displayBreeds(breeds) {
-    const breedLinks = breeds.map(breed => {
-        return `<a href="#" class="breed__link">${breed}</a>`;
-    }).join('');
-    
-    document.querySelector('.breed__sort').innerHTML = breedLinks;
-
-    const breedLinksElements = document.querySelectorAll('.breed__link');
-    breedLinksElements.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default action
-            const selectedBreed = this.textContent; // Получаем выбранную породу
-            filterCards(selectedBreed); // Фильтруем карточки
-        });
-    });
-}
-
-// Функция для отображения карточек
-function renderCards(breeds) {
-    const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением карточек
-    breeds.forEach(dataCat => {
-        const cardInst = new Card(dataCat, '#card-template');
-        const newCardElem = cardInst.getElement();
-        const catNameElement = newCardElem.querySelector('.card__name');
-        catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); // Открываем модальное окно при нажатии на имя котика
-        cardsContainer.append(newCardElem);
-    });
-}
-
-// Функция для фильтрации карточек
-function filterCards(selectedBreed) {
-    const cards = document.querySelectorAll('.cards .card');
-    cards.forEach(card => {
-        const cardBreed = card.querySelector('.card__breed').textContent; // Получаем породу из карточки
-        if (cardBreed === selectedBreed || selectedBreed === '') {
-            card.style.display = 'block'; // Показываем карточки выбранной породы
-        } else {
-            card.style.display = 'none'; // Скрываем остальные карточки
-        }
-    });
-}
-
-// Вызываем функцию после загрузки страницы
-document.addEventListener('DOMContentLoaded', function() {
-    fetchBreeds(); // Запускаем получение данных
-});
 
 // Функция добавления котика на страницу
 function formAddCat(event){
@@ -188,8 +108,80 @@ btnOpenPopup.addEventListener('click',()=>  AddCat.open());
 // Обрабатываем отправку формы добавления котика
 formCatAdd.addEventListener('submit', formAddCat)
 
+// Функция для получения данных о породах из API
+async function fetchBreeds() {
+    try {
+        const response = await fetch('http://89.111.169.234:3000/cats');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const dataCat = await response.json(); // Предполагаем, что API возвращает JSON
+        const uniqueBreeds = [...new Set(dataCat.map(cat => cat.breed))]; // Удаляем дубликаты
+        displayBreeds(uniqueBreeds); // Вызываем функцию для отображения пород
+        // renderCards(dataCat); // Отображаем карточки
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+    }
+}
 
-fetchCats();
+// Функция для отображения пород
+function displayBreeds(breeds) {
+    const breedLinks = breeds.map(breed => {
+        return `<a href="#" class="breed__link">${breed}</a>`;
+    }).join('');
+    
+    document.querySelector('.breed__sort').innerHTML = breedLinks;
+
+    const breedLinksElements = document.querySelectorAll('.breed__link');
+    breedLinksElements.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default action
+            const selectedBreed = this.textContent; // Получаем выбранную породу
+            filterCards(selectedBreed); // Фильтруем карточки
+        });
+    });
+}
+
+// Функция для отображения карточек
+function renderCards(breeds) {
+    const cardsContainer = document.querySelector('.cards');
+    cardsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением карточек
+    breeds.forEach(dataCat => {
+        const cardInst = new Card(dataCat, '#card-template');
+        const newCardElem = cardInst.getElement();
+        const catNameElement = newCardElem.querySelector('.card__name');
+        catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); // Открываем модальное окно при нажатии на имя котика
+        cardsContainer.append(newCardElem);
+    });
+}
+
+// Функция для фильтрации карточек
+function filterCards(selectedBreed) {
+    const cards = document.querySelectorAll('.cards .card');
+    cards.forEach(card => {
+        const cardBreed = card.querySelector('.card__breed').textContent; // Получаем породу из карточки
+        if (cardBreed === selectedBreed || selectedBreed === '') {
+            card.style.display = 'block'; // Показываем карточки выбранной породы
+        } else {
+            card.style.display = 'none'; // Скрываем остальные карточки
+        }
+    });
+}
+
+// Вызываем функцию после загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    fetchBreeds(); // Запускаем получение данных
+});
+
+// Функция для отображения всех котиков
+function showAllCats() {
+    console.log('кнопка нажата')
+    fetchBreeds(); // Вызываем функцию для получения всех котиков
+}
+
+// Добавляем обработчик события для кнопки
+document.getElementById('showAllCats').addEventListener('click', showAllCats);
+
 // //Функция Авторизации
 // function formFromAuthorization(event){
 //     event.preventDefault();

@@ -1,29 +1,3 @@
-/* 
-.breed__sort {
-	padding: 12px 16px;
-	box-shadow: 0px 2px 4px rgba(40, 41, 61, 0.04), 0px 8px 16px rgba(96, 97, 112, 0.16);
-	border-radius: 12px;
-	background: #FFFFFF;
-	display: flex;
-	align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-	gap: 16px;
-	margin: 5px 5px;
-}
-
-.breed__link {
-    display: inline-block; 
-	text-decoration: none;
-	font-size: 14px;
-	line-height: 20px;
-	color: #7B8E98;
-    transition: background-color 0.3s; 
-}
-
-.breed__link:hover {
-	color: #1A1A1A;
-} */
 
 .breed__link {
 	font-size: 13px;
@@ -46,6 +20,37 @@
 
 /* Дополнительный стиль для контенера со ссылками, чтобы отцентрировать */
 .breed__sort {
+    display: flex;
+    align-items: center;
     padding: 20px; /* Отступы вокруг списка пород */
-   
 }
+
+.breed__sort_container {
+    display: flex;
+    overflow: hidden;
+    margin: 10px 0px;
+}
+
+.breed__prev,
+.breed__next {
+    background-color: #f1f1f1; /* Цвет фона кнопки */
+    border: none; /* Убираем стандартные границы */
+    border-radius: 5px; /* Скругление углов */
+    padding: 10px; /* Внутренние отступы */
+    cursor: pointer; /* Указывает на то, что зона кликабельная */
+    transition: background-color 0.3s; /* Плавный переход цвета фона при наведении */
+    font-size: 1.5rem; /* Размер шрифта для иконки */
+}
+
+.breed__prev:hover,
+.breed__next:hover {
+    background-color: #ddd; /* Цвет фона при наведении */
+}
+
+.breed__prev:focus,
+.breed__next:focus {
+    outline: none; /* Убираем обводку при фокусе */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Добавляем тень при фокусе для большей заметности */
+}
+
+
