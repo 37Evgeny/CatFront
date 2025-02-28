@@ -1,5 +1,11 @@
-.main{
+/* .main{
     flex: 1;
     padding-top: 00px;
     padding-bottom: 40px;
+} */
+
+.main {
+    display: grid; /* Используем CSS Grid */
+    grid-template-columns: 1fr 3fr; /* Первая колонка - 1 часть, вторая - 3 части */
+    gap: 20px; /* Пробел между колонками */
 }
