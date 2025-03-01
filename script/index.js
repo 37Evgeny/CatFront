@@ -8,6 +8,8 @@ const btnOpenAuthorization = document.querySelector('#login');
 const formCatAdd = document.querySelector('#popup-form-cat');
 // Форма авторизации (не используется в коде)
 const formAuthorization = document.querySelector('#form-login');
+// Индекс текущей породы
+let currentBreedIndex = 0;
 
 async function fetchCats() {
     try {
@@ -112,6 +114,42 @@ function filterCards(selectedBreed) {
 document.addEventListener('DOMContentLoaded', function() {
     fetchBreeds(); // Запускаем получение данных
 });
+
+let currentIndex = 0; // Индекс текущей породы
+const breeds = ['Сиамская', 'Персидская', 'Британская']; // Пример пород
+
+function renderBreeds() {
+    const breedSort = document.querySelector('.breed__sort');
+    breedSort.innerHTML = ''; // Очищаем контейнер перед добавлением новых пород
+
+    // Добавляем породы в контейнер
+    breeds.forEach((breed) => {
+        const span = document.createElement('span');
+        span.className = 'breed-name';
+        span.textContent = breed; // Здесь можно добавить больше информации о породе
+        breedSort.appendChild(span);
+    });
+
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const breedSort = document.querySelector('.breed__sort');
+    const breedWidth = document.querySelector('.breed__link').offsetWidth; // Ширина породы
+    breedSort.style.transform = `translateX(-${currentIndex * breedWidth}px)`; // Сдвигаем контейнер
+}
+
+document.querySelector('.breed__next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % breeds.length; // Переход к следующей породе
+    updateDisplay();
+});
+
+document.querySelector('.breed__prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + breeds.length) % breeds.length; // Переход к предыдущей породе
+    updateDisplay();
+});
+
+
 
 // Функция добавления котика на страницу
 function formAddCat(event){

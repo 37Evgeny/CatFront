@@ -1,6 +1,6 @@
 
 .breed__link {
-	font-size: 13px;
+	font-size: 15px;
     display: inline-block; /* чтобы элементы выстраивались в ряд */
     padding: 5px 10px; /* внутренние отступы для оформления */
     margin: 5px; /* отступы между ссылками */
@@ -23,9 +23,12 @@
     display: flex;
     align-items: center;
     padding: 20px; /* Отступы вокруг списка пород */
+    transition: transform 0.3s ease;
 }
 
 .breed__sort_container {
+    width: 100%;
+    position: relative;
     display: flex;
     overflow: hidden;
     margin: 10px 0px;
@@ -40,6 +43,27 @@
     cursor: pointer; /* Указывает на то, что зона кликабельная */
     transition: background-color 0.3s; /* Плавный переход цвета фона при наведении */
     font-size: 1.5rem; /* Размер шрифта для иконки */
+}
+
+.breed__next,
+.breed__prev {
+    position: absolute;
+    top: 50%; /* Центрируем по вертикали */
+    transform: translateY(-50%); /* Сдвигаем на половину высоты кнопки для точного центрирования */
+    background-color: rgba(255, 255, 255, 0.8); /* Пример фона для кнопок */
+    border: none; /* Убираем рамку */
+    padding: 10px; /* Добавляем отступы для кнопок */
+    cursor: pointer; /* Указываем, что это кнопки */
+    z-index: 10; /* Убедитесь, что кнопки находятся поверх других элементов */
+}
+
+.breed__next {
+    position: absolute; /* Устанавливаем абсолютное позиционирование для кнопки "вперед" */
+    right: -10px; /* Сдвигаем кнопку вправо */
+}
+
+.breed__prev {
+    left: -10px; /* Сдвигаем кнопку влево */
 }
 
 .breed__prev:hover,
