@@ -96,6 +96,11 @@ function renderCards(breeds) {
          // Открываем модальное окно при нажатии на имя котика
         catNameElement.addEventListener('click', () => showExpandedCard(dataCat));
         cardsContainer.append(newCardElem);
+
+        newCardElem.addEventListener('dragstart', dragStart);
+        newCardElem.addEventListener('dragend', dragEnd);
+        newCardElem.addEventListener('dragover', dragOver);
+        newCardElem.addEventListener('drop', drop);
     });
 }
 
