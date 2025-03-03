@@ -15,12 +15,8 @@ function setTheme(themeName) {
 function toggleTheme() {
    if (localStorage.getItem('theme') === 'theme-dark') {
        setTheme('theme-light');
-       themeName.textContent = 'Light Theme';
-       img.src = './sun-Photoroom.png'
    } else {
        setTheme('theme-dark');
-       themeName.textContent = 'Dark Theme';
-       img.src = './moon-Photoroom.png'
    }
 }
 
@@ -30,11 +26,9 @@ function toggleTheme() {
    if (localStorage.getItem('theme') === 'theme-dark') {
        setTheme('theme-dark');
        document.getElementById('slider').checked = false;
-       themeName.textContent = 'Dark Theme'
    } else {
        setTheme('theme-light');
      document.getElementById('slider').checked = true;
-     themeName.textContent = 'Light Theme'
    }
 })();
 

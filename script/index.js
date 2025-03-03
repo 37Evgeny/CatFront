@@ -55,7 +55,7 @@ async function fetchBreeds() {
     try {
         const response = await fetch('http://89.111.169.234:3000/cats');
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('ошибка в получении данных');
         }
         const dataCat = await response.json(); // Предполагаем, что API возвращает JSON
         const uniqueBreeds = [...new Set(dataCat.map(cat => cat.breed))]; // Удаляем дубликаты
@@ -77,7 +77,7 @@ function displayBreeds(breeds) {
     const breedLinksElements = document.querySelectorAll('.breed__link');
     breedLinksElements.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default action
+            event.preventDefault(); 
             const selectedBreed = this.textContent; // Получаем выбранную породу
             filterCards(selectedBreed); // Фильтруем карточки
         });
@@ -87,12 +87,14 @@ function displayBreeds(breeds) {
 // Функция для отображения карточек
 function renderCards(breeds) {
     const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = ''; // Очищаем контейнер перед добавлением карточек
+    // Очищаем контейнер перед добавлением карточек
+    cardsContainer.innerHTML = ''; 
     breeds.forEach(dataCat => {
         const cardInst = new Card(dataCat, '#card-template');
         const newCardElem = cardInst.getElement();
         const catNameElement = newCardElem.querySelector('.card__name');
-        catNameElement.addEventListener('click', () => showExpandedCard(dataCat)); // Открываем модальное окно при нажатии на имя котика
+         // Открываем модальное окно при нажатии на имя котика
+        catNameElement.addEventListener('click', () => showExpandedCard(dataCat));
         cardsContainer.append(newCardElem);
     });
 }
@@ -116,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 let currentIndex = 0; // Индекс текущей породы
-const breeds = ['Сиамская', 'Персидская', 'Британская']; // Пример пород
+const breeds = ['Сиамская', 'Персидская', 'Британская'];
 
 function renderBreeds() {
     const breedSort = document.querySelector('.breed__sort');
@@ -129,23 +131,26 @@ function renderBreeds() {
         span.textContent = breed; // Здесь можно добавить больше информации о породе
         breedSort.appendChild(span);
     });
-
     updateDisplay();
 }
 
 function updateDisplay() {
     const breedSort = document.querySelector('.breed__sort');
-    const breedWidth = document.querySelector('.breed__link').offsetWidth; // Ширина породы
-    breedSort.style.transform = `translateX(-${currentIndex * breedWidth}px)`; // Сдвигаем контейнер
+    // Ширина породы
+    const breedWidth = document.querySelector('.breed__link').offsetWidth; 
+    // Сдвигаем контейнер
+    breedSort.style.transform = `translateX(-${currentIndex * breedWidth}px)`; 
 }
 
 document.querySelector('.breed__next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % breeds.length; // Переход к следующей породе
+    // Переход к следующей породе
+    currentIndex = (currentIndex + 1) % breeds.length; 
     updateDisplay();
 });
 
 document.querySelector('.breed__prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + breeds.length) % breeds.length; // Переход к предыдущей породе
+    // Переход к предыдущей породе
+    currentIndex = (currentIndex - 1 + breeds.length) % breeds.length; 
     updateDisplay();
 });
 
@@ -198,7 +203,7 @@ function showExpandedCard(dataCat) {
     modal.classList.add('modal'); // Добавляем класс для стилизации
     modal.innerHTML = `
         <div class="modal-content">
-        <button class="close-btn"><i class="fa-solid fa-xmark"> </i></button>
+        <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
             <h2><span class="cat-name">${dataCat.name}</span></h2>
             <img src="${dataCat.img_link}" alt="${dataCat.name}">
             <p>Порода: ${dataCat.breed}</p>

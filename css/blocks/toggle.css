@@ -4,14 +4,18 @@
   --color-accent: #fd6f53;
   --font-color: #000000;
   --btn-color: #000000;
+  --footer: #000000;
 }
+
 .theme-dark {
   --color-primary: #17ed90;
   --color-secondary: #121212;;
   --color-accent: #12cdea;
   --font-color: #E0E0E0;
   --btn-color: #BB86FC;
+  --footer: #ffffff;
 }
+
 .container {
   background: var(--color-secondary);
 }
@@ -26,8 +30,12 @@
     color: #FFFFFF;
 }
 
-.header__container a, i {
-    color: var(--font-color);
+.header__container .fa-solid {
+    color: var(--btn-color);
+}
+
+.logo {
+    color: var(--btn-color);
 }
 
 .header {
@@ -36,6 +44,10 @@
 
 .footer {
     background: var(--color-secondary);
+}
+
+.soc__link .fa-brands {
+    color: var(--footer);
 }
 
 /* toggle */
