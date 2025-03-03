@@ -1,0 +1,19 @@
+.loader {
+    border: 8px solid #f3f3f3; /* Светлый цвет фона */
+    border-top: 8px solid #3498db; /* Цвет верхней части */
+    border-radius: 50%; /* Круглая форма */
+    width: 50px; /* Ширина прелоадера */
+    height: 50px; /* Высота прелоадера */
+    animation: spin 1s linear infinite; /* Анимация вращения */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */
+    display: none; /* Скрыт по умолчанию */
+    z-index: 1000; /* Чтобы прелоадер был поверх контента */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

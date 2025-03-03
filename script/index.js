@@ -12,6 +12,10 @@ const formAuthorization = document.querySelector('#form-login');
 let currentBreedIndex = 0;
 
 async function fetchCats() {
+
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block'; // Показываем прелоадер
+
     try {
         // showLoadingIndicator(); // Показать индикатор загрузки
         const response = await api.getAllCats();
@@ -22,7 +26,7 @@ async function fetchCats() {
         console.error('Ошибка при получении котиков:', error); // Обработка ошибок
         alert('Не удалось загрузить котиков. Попробуйте позже.'); // Уведомление пользователя
     } finally {
-        // hideLoadingIndicator(); // Скрыть индикатор загрузки
+       loader.style.display = 'none'; // Скрываем прелоадер после загрузки
     }
 }
 
